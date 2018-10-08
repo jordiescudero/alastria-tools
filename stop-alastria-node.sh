@@ -1,6 +1,4 @@
 #!/bin/bash
 
-. env.sh
+docker-compose stop
 
-echo  "stop alastria container with alastria-node image and external data directory" 
-docker stop alastria

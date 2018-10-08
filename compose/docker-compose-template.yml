@@ -1,0 +1,51 @@
+version: '2'
+services:
+    nginx:
+      build:
+          context: ./nginx
+      restart: always
+      logging:
+        driver: json-file
+        options:
+            max-size: "10m"
+            max-file: "5" 
+      volumes:
+          - ./ssl:/etc/nginx/ssl         
+      expose:
+          - 80
+          - 443
+          - 8000
+      ports:
+          - "80:80"     
+          - "443:443"   
+          - "8000:8000"
+      environment:
+          - TZ=$TZ
+          - SSL_ENABLED=$SSL_ENABLED
+          - LETSENCRYPT=$LETSENCRYPT
+          - LE_EMAIL=$LE_EMAIL
+          - LE_FQDN=$LE_FQDN
+          - PORTAL_USER=$PORTAL_USER
+          - PORTAL_PASSWORD=$PORTAL_PASSWORD
+      links:
+          - alastria
+    alastria:
+      container_name: alastria
+      image: alastria-node
+      restart: always
+      logging:
+        driver: json-file
+        options:
+            max-size: "10m"
+            max-file: "5" 
+      volumes:
+        - $DATA_DIR/geth:/root/alastria/data/geth
+        - $DATA_DIR/constellation:/root/alastria/data/constellation
+        - $CONFIG_DIR/data:/root/alastria-node/data
+      ports:
+        - 9000:9000/tcp
+        - 21000:21000/tcp
+        - 21000:21000/udp
+        - 22000:22000/tcp
+        - 8443:8443/tcp
+        

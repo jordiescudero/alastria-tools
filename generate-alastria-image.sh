@@ -26,4 +26,8 @@ docker cp tmp_alastria_node_container:/root/alastria/data/constellation $DATA_DI
 echo  "delete temporal container" 
 docker rm -v tmp_alastria_node_container
 
+echo "generate docker-compose file"
+source env.sh; rm -rf docker-compose.yml; envsubst < "compose/docker-compose-template.yml" > "docker-compose.yml";
+
+
 

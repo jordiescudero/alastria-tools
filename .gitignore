@@ -2,3 +2,5 @@ node_data
 node_config
 alastria-node
 env.sh
+docker-compose.yml
+.ssl
