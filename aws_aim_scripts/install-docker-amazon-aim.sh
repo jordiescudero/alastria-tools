@@ -14,4 +14,6 @@ chmod +x /usr/local/bin/docker-compose
 
 ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 
+yum install -y git
+
 docker-compose --version
